@@ -96,6 +96,8 @@
     {% endfor %}
   </div>
 
+  {% include 'recipe-feed' %}
+
   {% if paginate.pages > 1 %}
     {% include 'pagination' %}
   {% endif %}
