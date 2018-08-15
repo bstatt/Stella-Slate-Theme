@@ -10,6 +10,31 @@
   Theme Store optional settings
   - Home page only: only shows on the home page
 {%- endcomment -%}
+  <section data-section-id="{{ section.id }}" data-section-type="header">
+    {%- if section.settings.announcement_bar_enabled -%}
+      <div>
+        {%- if section.settings.announcement_bar_home_page_only == false or template.name == 'index' -%}
+          {%- if section.settings.announcement_bar_link != blank -%}
+            <a href="{{ section.settings.announcement_bar_link }}">
+              {{ section.settings.announcement_bar_text | escape }}
+            </a>
+          {%- else -%}
+            <p>{{ section.settings.announcement_bar_text | escape }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {% if section.settings.logo != blank %}
+    <style>
+      .logo-image {
+        display: block;
+        max-width: {{ section.settings.logo_max_width }}px;
+      }
+    </style>
+  {% endif %}
+  </section>
+
   <section class="top-header">
     <div class="container">
       <div class="row">
@@ -23,7 +48,7 @@
         <div class="col-md-4 col-xs-12 col-sm-4">
           <!-- Site Logo -->
           <div class="logo text-center">
-            <a href="index.html">
+            <a href="{{shop.url}}">
               <!-- replace logo here -->
               <svg width="205px" height="29px" viewBox="0 0 155 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-size="40" font-family="AustinBold, Austin" font-weight="bold">
@@ -96,154 +121,10 @@
     </div>
   </section>
 
-  <!-- <section class="menu">
-    <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Shop
-              </a>
-              <div class="dropdown-menu full-width" aria-labelledby="navbarDropdown">
-                <div class="row">
-                  <div class="col-4">
-                    <div class="dropdown-header">Mens</div>
-                    <div class="dropdown-divider"></div>
-                    <a href="shop.html">Shirts</a>
-                    <a href="about.html">Jeans</a>
-                    <a href="404.html">Dress Pants</a>
-                    <a href="coming-soon.html">Shoes</a>
-                    <a href="faq.html">Jackets</a>
-                  </div>
-                  <div class="col-4">
-                    <div class="dropdown-header">Womens</div>
-                    <div class="dropdown-divider"></div>
-                    <a href="contact.html">Dresses</a>
-                    <a href="about.html">Leggings</a>
-                    <a href="404.html">Skirts</a>
-                    <a href="coming-soon.html">Coats</a>
-                    <a href="faq.html">Sweatshirts</a>
-                  </div>
-                  <div class="col-4">
-                    <div class="dropdown-header">Accessories</div>
-                    <div class="dropdown-divider"></div>
-                    <a href="contact.html">Watches</a>
-                    <a href="about.html">Bracelets</a>
-                    <a href="404.html">Necklaces</a>
-                    <a href="coming-soon.html">Purses</a>
-                  </div>
-                </div>
-              </div>
-            </li>
+  {% include 'menu' %}
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Clearance
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <div class="dropdown-header">Items</div>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Watches</a>
-                <a class="dropdown-item" href="#">Bags</a>
-              </div>
-            </li>
+  
 
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </section> -->
-
-<section data-section-id="{{ section.id }}" data-section-type="header">
-  {%- if section.settings.announcement_bar_enabled -%}
-    <div>
-      {%- if section.settings.announcement_bar_home_page_only == false or template.name == 'index' -%}
-        {%- if section.settings.announcement_bar_link != blank -%}
-          <a href="{{ section.settings.announcement_bar_link }}">
-            {{ section.settings.announcement_bar_text | escape }}
-          </a>
-        {%- else -%}
-          <p>{{ section.settings.announcement_bar_text | escape }}</p>
-        {%- endif -%}
-      {%- endif -%}
-    </div>
-  {%- endif -%}
-
-  <!-- <header role="banner">
-    {% if template.name == 'index' %}
-      <h1>
-    {% else %}
-      <div class="h1">
-    {% endif %}
-        <a href="/" class="logo-image">
-          {% if section.settings.logo != blank %}
-            {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
-            <img src="{{ section.settings.logo | img_url: image_size }}"
-                srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-                alt="{{ section.settings.logo.alt | default: shop.name }}">
-          {% else %}
-            {{ shop.name }}
-          {% endif %}
-        </a>
-    {% if template.name == 'index' %}
-      </h1>
-    {% else %}
-      </div>
-    {% endif %}
-  </header> -->
-
-  <nav role="navigation" class="navbar navbar-expand-lg navbar-light">
-    <ul class="navbar-nav mx-auto">
-      {% for link in linklists[section.settings.menu].links %}
-        {% if link.links != blank %}
-          <li class="nav-item">
-            <a href="{{ link.url }}" class="nav-item">
-              {{ link.title }}
-              {% include 'icon-arrow-down' %}
-            </a>
-            <ul>
-              {% for childlink in link.links %}
-                <li class="nav-item dropdown">
-                  <a href="{{ childlink.url }}" class="dropdown-item">
-                    {{ childlink.title }}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-          </li>
-        {% else %}
-          <li>
-            <a href="{{ link.url }}">
-              {{ link.title }}
-            </a>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </nav>
-</section>
-
-{% if section.settings.logo != blank %}
-  <style>
-    .logo-image {
-      display: block;
-      max-width: {{ section.settings.logo_max_width }}px;
-    }
-  </style>
-{% endif %}
 
 {% schema %}
   {
