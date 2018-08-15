@@ -10,6 +10,163 @@
   Theme Store optional settings
   - Home page only: only shows on the home page
 {%- endcomment -%}
+  <section class="top-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-xs-12 col-sm-4">
+          <div class="contact-number">
+            <i class="fa fa-phone"></i>
+            <span>0129- 12323-123123</span>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-xs-12 col-sm-4">
+          <!-- Site Logo -->
+          <div class="logo text-center">
+            <a href="index.html">
+              <!-- replace logo here -->
+              <svg width="205px" height="29px" viewBox="0 0 155 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-size="40" font-family="AustinBold, Austin" font-weight="bold">
+                  <g id="Group" transform="translate(-108.000000, -297.000000)" fill="#000000">
+                    <text id="fashion">
+                      <tspan x="108.94" y="325">STELLA</tspan>
+                    </text>
+                  </g>
+                </g>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4 col-xs-12 col-sm-4">
+          <ul class="top-menu list-inline float-right">
+            <li class="list-inline-item">
+              <a href="/cart">
+                {% include 'icon-cart' %}
+                {{ 'layout.cart.title' | t }}
+                ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
+              </a>
+            </li>
+            <li class="list-inline-item">
+              {% if shop.customer_accounts_enabled %}
+                <ul>
+                  {% if customer %}
+                    <li>
+                      {% if customer.first_name != blank %}
+                        {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                        {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+                      {% else %}
+                        <a href="/account">{{ 'layout.customer.account' | t }}</a>
+                      {% endif %}
+                    </li>
+                    <li>
+                      {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                    </li>
+                  {% else %}
+                    <li>
+                      {{ 'layout.customer.log_in' | t | customer_login_link }}
+                    </li>
+                    <li>
+                      {{ 'layout.customer.create_account' | t | customer_register_link }}
+                    </li>
+                  {% endif %}
+                </ul>
+              {% endif %}
+            </li>
+            <li>
+              <form action="/search" method="get" role="search">
+                <!-- <label for="Search" class="label-hidden">
+                  {{ 'general.search.placeholder' | t }}
+                </label> -->
+
+                <input type="search"
+                  name="q"
+                  id="Search"
+                  value="{{ search.terms | escape }}"
+                  placeholder="{{ 'general.search.placeholder' | t }}">
+
+                <button type="submit" class="button">
+                  {% include 'icon-search' %}
+                  <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+                </button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="menu">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Shop
+              </a>
+              <div class="dropdown-menu full-width" aria-labelledby="navbarDropdown">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="dropdown-header">Mens</div>
+                    <div class="dropdown-divider"></div>
+                    <a href="shop.html">Shirts</a>
+                    <a href="about.html">Jeans</a>
+                    <a href="404.html">Dress Pants</a>
+                    <a href="coming-soon.html">Shoes</a>
+                    <a href="faq.html">Jackets</a>
+                  </div>
+                  <div class="col-4">
+                    <div class="dropdown-header">Womens</div>
+                    <div class="dropdown-divider"></div>
+                    <a href="contact.html">Dresses</a>
+                    <a href="about.html">Leggings</a>
+                    <a href="404.html">Skirts</a>
+                    <a href="coming-soon.html">Coats</a>
+                    <a href="faq.html">Sweatshirts</a>
+                  </div>
+                  <div class="col-4">
+                    <div class="dropdown-header">Accessories</div>
+                    <div class="dropdown-divider"></div>
+                    <a href="contact.html">Watches</a>
+                    <a href="about.html">Bracelets</a>
+                    <a href="404.html">Necklaces</a>
+                    <a href="coming-soon.html">Purses</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Clearance
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-header">Items</div>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Watches</a>
+                <a class="dropdown-item" href="#">Bags</a>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </section> -->
+
 <section data-section-id="{{ section.id }}" data-section-type="header">
   {%- if section.settings.announcement_bar_enabled -%}
     <div>
@@ -25,7 +182,7 @@
     </div>
   {%- endif -%}
 
-  <header role="banner">
+  <!-- <header role="banner">
     {% if template.name == 'index' %}
       <h1>
     {% else %}
@@ -46,69 +203,21 @@
     {% else %}
       </div>
     {% endif %}
+  </header> -->
 
-    <a href="/cart">
-      {% include 'icon-cart' %}
-      {{ 'layout.cart.title' | t }}
-      ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
-    </a>
-
-    {% if shop.customer_accounts_enabled %}
-      <ul>
-        {% if customer %}
-          <li>
-            {% if customer.first_name != blank %}
-              {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
-              {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-            {% else %}
-              <a href="/account">{{ 'layout.customer.account' | t }}</a>
-            {% endif %}
-          </li>
-          <li>
-            {{ 'layout.customer.log_out' | t | customer_logout_link }}
-          </li>
-        {% else %}
-          <li>
-            {{ 'layout.customer.log_in' | t | customer_login_link }}
-          </li>
-          <li>
-            {{ 'layout.customer.create_account' | t | customer_register_link }}
-          </li>
-        {% endif %}
-      </ul>
-    {% endif %}
-
-    <form action="/search" method="get" role="search">
-      <label for="Search" class="label-hidden">
-        {{ 'general.search.placeholder' | t }}
-      </label>
-
-      <input type="search"
-        name="q"
-        id="Search"
-        value="{{ search.terms | escape }}"
-        placeholder="{{ 'general.search.placeholder' | t }}">
-
-      <button type="submit" class="button">
-        {% include 'icon-search' %}
-        <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-      </button>
-    </form>
-  </header>
-
-  <nav role="navigation">
-    <ul>
+  <nav role="navigation" class="navbar navbar-expand-lg navbar-light">
+    <ul class="navbar-nav mx-auto">
       {% for link in linklists[section.settings.menu].links %}
         {% if link.links != blank %}
-          <li>
-            <a href="{{ link.url }}">
+          <li class="nav-item">
+            <a href="{{ link.url }}" class="nav-item">
               {{ link.title }}
               {% include 'icon-arrow-down' %}
             </a>
             <ul>
               {% for childlink in link.links %}
-                <li>
-                  <a href="{{ childlink.url }}">
+                <li class="nav-item dropdown">
+                  <a href="{{ childlink.url }}" class="dropdown-item">
                     {{ childlink.title }}
                   </a>
                 </li>

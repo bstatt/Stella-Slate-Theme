@@ -1,0 +1,111 @@
+/*=================================================================
+  Header
+==================================================================*/
+.top-header .container {
+  padding-top: 35px;
+  padding-bottom: 35px;
+  border-bottom: 1px solid #dedede;
+}
+
+.top-header .dropdown-menu {
+  left: auto;
+  right: 0;
+  max-width: 300px;
+}
+
+@media (max-width: 480px) {
+  .top-header .dropdown-menu {
+    right: 0;
+    left: 0;
+    max-width: 100%;
+  }
+}
+
+.top-header .contact-number {
+  font-size: 12px;
+  color: #333;
+}
+
+@media (max-width: 480px) {
+  .top-header .contact-number {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-header .contact-number {
+    text-align: center;
+    padding: 10px 0;
+  }
+}
+
+.top-header .contact-number i {
+  margin-right: 4px;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  .top-header .top-menu {
+    text-align: center;
+    padding: 10px 0;
+  }
+}
+
+.top-header .top-menu > li > a {
+  color: #333;
+  font-size: 15px;
+  padding: 0 8px;
+}
+
+.top-header .top-menu > li > a:hover, .top-header .top-menu > li > a:focus {
+  background: transparent;
+}
+
+.top-header .top-menu > li .fa {
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+@media (max-width: 480px) {
+  .top-header .logo {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-header .logo {
+    padding: 10px;
+  }
+}
+
+.top-header .logo a {
+  display: inline-block;
+}
+
+.top-menu li svg {
+  margin-right: 5px;
+}
+
+.navbar-nav > li > a {
+  color: #333;
+  font-size: 14px;
+  padding: 20px 15px;
+  text-transform: uppercase;
+  transition: .2s ease-in-out 0s;
+  border: 1px solid transparent;
+}
+
+/*=================================================================
+  Title
+==================================================================*/
+.title {
+  padding: 50px 0 30px;
+}
+
+.title h2 {
+  font-size: 18px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
